@@ -1,5 +1,5 @@
 import * as Validator from 'class-validator';
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateAccountDto {
   /** email */
@@ -9,6 +9,7 @@ export class CreateAccountDto {
   email: string;
 
   /** password */
+  @ApiProperty()
   @Validator.Length(8, 100, {
     message: '비밀번호는 최소 8자 이상이어야 합니다.',
   })
@@ -16,16 +17,14 @@ export class CreateAccountDto {
   password: string;
 
   /** name */
+  @ApiProperty()
   @Validator.Length(2, 30, { message: '이름은 최소 2자 이상이어야 합니다.' })
   @Validator.IsString()
   name: string;
 
   /** mobile */
+  @ApiProperty()
   @Validator.Length(13, 13, { message: '휴대폰번호를 입력해주세요.' })
   @Validator.IsString()
   mobile: string;
-
-  /** refreshToken */
-  @Validator.IsString()
-  refreshToken?: string;
 }

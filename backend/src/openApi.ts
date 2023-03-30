@@ -21,7 +21,7 @@ export const useOpenApi = (app) => {
       },
       // openapi.yaml output to frontend
       clientGeneratorOptions: {
-        enabled: process.env.NODE_ENV !== 'production',
+        enabled: process.env.NODE_ENV === 'production',
         type: 'typescript-axios', //typescript-axios
         outputFolderPath: '../frontend/src/openapi',
         additionalProperties:

@@ -5,20 +5,12 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class LoginInput {
   /** email */
-  @ApiProperty({
-    description: '유저 이메일',
-    required: true,
-    example: 'test@test.com',
-  })
+  @ApiProperty()
   @Validator.IsEmail({}, { message: '이메일을 입력해 주시기 바랍니다.' })
   email: string;
 
   /** password */
-  @ApiProperty({
-    description: '유저 비밀번호',
-    required: true,
-    example: 'a123456789',
-  })
+  @ApiProperty()
   @Validator.Length(8, 100, {
     message: '비밀번호는 최소 8자 이상이어야 합니다.',
   })
@@ -27,13 +19,16 @@ export class LoginInput {
 }
 
 export class LoginOutput extends CoreOutput {
+  @ApiProperty({ required: false, type: User })
   user?: User;
 
+  @ApiProperty({ required: false })
   @Validator.IsString()
   accessToken?: string;
 }
 
 export class LogOutInput {
+  @ApiProperty({ type: Number })
   @Validator.IsNumber()
   userId: number;
 }
