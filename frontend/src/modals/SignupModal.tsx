@@ -2,8 +2,8 @@ import React, {Fragment, useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
 import {useForm} from "react-hook-form";
 
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch, RootState} from "../store";
+import {useSelector} from "react-redux";
+import {RootState} from "../store";
 
 import {Api} from "../utile/api";
 import {Dialog, Transition } from "@headlessui/react";
@@ -70,14 +70,12 @@ export const SignupModal = () => {
     /** submit */
     const onSubmit = handleSubmit(async () => {
         const {email,password,name,mobile} = getValues();
-        await Api().post(
-            '/user/register',
+        await Api().user.createAccount(
             {
                 "email": email,
                 "password": password,
                 "name": name,
                 "mobile": mobile,
-                "refreshToken": "",
             },)
             .then((res) => {
                 if (res.data.success) {

@@ -38,7 +38,8 @@ import { AuthModule } from './modules/auth/auth.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       synchronize: process.env.NODE_ENV !== 'production',
-      logging: process.env.NODE_ENV !== 'production',
+      //logging: process.env.NODE_ENV !== 'production',
+      logging: false,
       entities: [User],
     }),
     /*

@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Api, REFRESH_TOKEN_PATH} from "../../utile/api";
+import {Api} from "../../utile/api";
 
 export interface AuthState {
     data: {
@@ -21,7 +21,7 @@ export const sendLogout = createAsyncThunk(
     'user/sendLogout',
     async (_, thunkAPI) => {
         try {
-            const response = await Api().get('/auth/logout');
+            const response = await Api().auth.logout();
             if (!response || !response.data) {
                 return thunkAPI.rejectWithValue(null);
             }
@@ -37,7 +37,7 @@ export const sendRefreshAccessToken = createAsyncThunk(
     'user/sendRefreshAccessToken',
     async (_, thunkAPI) => {
         try {
-            const response = await Api().get(REFRESH_TOKEN_PATH);
+            const response = await Api().auth.refreshToken();
 
             if (!response || !response.data) {
                 return thunkAPI.rejectWithValue(null);

@@ -52,8 +52,7 @@ export const ProfileModify = () => {
     const onSubmit = handleSubmit(async () => {
         console.log('서브밋~!!')
         const {email,password,name,mobile} = getValues();
-        await Api().patch(
-            '/user/modify',
+        await Api().user.profileUpdate(
             {
                 "email": email,
                 "name": name,

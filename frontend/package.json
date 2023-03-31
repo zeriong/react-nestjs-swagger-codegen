@@ -28,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "codegen": "npx @openapitools/openapi-generator-cli generate -i ../backend/openapi.yaml -g typescript-axios --additional-properties apiPackage=apis,modelPackage=models,withoutPrefixEnums=true,withSeparateModelsAndApi=true -o ./src/openapi"
   },
   "eslintConfig": {
     "extends": [

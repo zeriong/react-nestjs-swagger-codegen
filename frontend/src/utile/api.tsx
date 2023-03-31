@@ -1,6 +1,7 @@
 import {store} from "../store";
 import axios, {AxiosHeaders, AxiosInstance, AxiosRequestConfig} from "axios";
 import {sendRefreshAccessToken, SET_LOGOUT} from "../store/slices/auth.slice";
+import {AuthApiFactory, UserApiFactory} from "../openapi";
 
 const API_URL = "http://localhost:4000";
 export const REFRESH_TOKEN_PATH = "/auth/refresh";
@@ -13,13 +14,17 @@ const instance = axios.create({
     withCredentials: true,
 });
 
-export const Api = (): AxiosInstance => {
-    return instance
+export const Api = () => {
+    return {
+        user: UserApiFactory(null,'',instance),
+        auth: AuthApiFactory(null,'',instance),
+    }
 }
 
 export const InitApi = () => {
     console.log('InitApi!!!')
-    instance.interceptors.request.use((config) => {
+    instance.interceptors.request.use(
+        (config) => {
         // @ts-ignore
         config.headers.Authorization = `Bearer ${store.getState().auth.data.accessToken}`
         return config

@@ -62,15 +62,14 @@ export const SigninModal = () => {
     /** submit */
     const onSubmit = handleSubmit(async () => {
         const {email,password} = getValues();
-        await Api().post(
-            '/auth/login',
+        await Api().auth.login(
             {
                 email, password,
             },)
             .then((res) => {
                 console.log(res.data);
                 if (res.data.success) {
-                    dispatch(SET_LOGIN(res.data));
+                    dispatch(SET_LOGIN(res.data.accessToken));
                     dispatch(SET_USER(res.data.user));
                     closeModal();
                     setValue('email', "");

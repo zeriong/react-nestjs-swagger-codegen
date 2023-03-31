@@ -24,7 +24,7 @@ export const sendMyProfile = createAsyncThunk(
     'user/sendMyProfile',
     async (_, thunkAPI) => {
         try {
-            const response = await Api().get('/user/profile')
+            const response = await Api().user.profile();
 
             if (!response) {
                 return thunkAPI.rejectWithValue(null);
